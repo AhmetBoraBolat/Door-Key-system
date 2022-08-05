@@ -9,7 +9,7 @@ public class SpotFollowingController : MonoBehaviour
 
     private Vector3 newPosition;
 
-    [SerializeField] [Range(0,3)] private float LerpValue;
+    [SerializeField] [Range(0,5)] private float LerpValue;
     void Start()
     {
         offset = transform.position - ballTransform.position;
