@@ -4,28 +4,33 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-   [SerializeField] private float openangle;
-
-   Quaternion startRot;
-   Quaternion newRot;
+    [SerializeField] private KeyController.KeyType keyType;
+     Animator anim;
     void Start()
     {
-        startRot = this.transform.rotation;
-        Quaternion newRot = Quaternion.Euler(this.transform.eulerAngles.x,openangle,this.transform.eulerAngles.z);
-    }
-
-    // Update is called once per frame
-    void Update()
+        anim = GetComponentInChildren<Animator>();
+    } 
+    
+   private void OnTriggerEnter(Collider other) 
+   {
+    if(other.tag == "Karakter")
     {
-    }
+        anim.SetTrigger("openclose");
+    } 
+   }
+  /*  private void OnTriggerExit(Collider other) 
+   {
+    if(other.tag == "Karakter")
+    {
+        anim.SetTrigger("openclose");
+    } 
+   }*/
 
-    private void OnCollisionEnter(Collision other) {
-       /*if(other.gameObject.CompareTag("Karakter"))
-        {
-           
-        } */
-         this.transform.rotation = Quaternion.Lerp(startRot,newRot,0.2f);
+   public KeyController.KeyType GetKeyType()
+    {
+        return keyType;    
     }
-
-// çalışmadı sonra kontrol et
+    public void OpenDoor(){
+        anim.SetTrigger("openclose");
+    }
 }
